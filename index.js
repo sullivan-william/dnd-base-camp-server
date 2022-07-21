@@ -2,10 +2,13 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
+const { Sequelize } = require('sequelize')
 
+// controllers
+app.use('/users', require('./controllers/users'))
 
 // routes
-app.use('/', async (req, res) => {
+app.get('/', async (req, res) => {
     try {
         res.send("Hello server!")
     } catch (error) {
