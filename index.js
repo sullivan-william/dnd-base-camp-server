@@ -3,9 +3,19 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const { Sequelize } = require('sequelize')
+const cors = require('cors')
+const bodyParser = require('body-parser')
+
+// middleware
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}))
+app.use(bodyParser.json())
 
 // controllers
 app.use('/users', require('./controllers/users'))
+app.use('/authentication', require('./controllers/authentication'))
 
 // routes
 app.get('/', async (req, res) => {
@@ -16,6 +26,7 @@ app.get('/', async (req, res) => {
         res.status(500).json(error)
     }
 })
+
 
 
 // listener

@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
         res.json(user)
     } catch (error) {
         console.log(error)
-        res.json(error)
+        res.status(500).json(error)
     }
 })
 
