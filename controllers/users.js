@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
         res.json(users)
     } catch (error) {
         console.log(error)
-        res.json(error)
+        res.status(500).json(error)
     }
 })
 
