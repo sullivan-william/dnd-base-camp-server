@@ -5,6 +5,7 @@ const app = express()
 const { Sequelize } = require('sequelize')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const cookieSession = require('cookie-session')
 
 // middleware
 app.use(cors({
@@ -12,6 +13,11 @@ app.use(cors({
     credentials: true
 }))
 app.use(bodyParser.json())
+app.use(cookieSession({
+    name: 'session',
+    keys: [ process.env.SESSION_SECRET ],
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 
 // controllers
 app.use('/users', require('./controllers/users'))
