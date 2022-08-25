@@ -6,6 +6,7 @@ const { Sequelize } = require('sequelize')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session')
+const defineCurrentUser = require('./middleware/defineCurrentUser')
 
 // middleware
 app.use(cors({
@@ -18,6 +19,7 @@ app.use(cookieSession({
     keys: [ process.env.SESSION_SECRET ],
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }))
+app.use(defineCurrentUser)
 
 // controllers
 app.use('/users', require('./controllers/users'))

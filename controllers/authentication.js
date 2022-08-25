@@ -26,14 +26,9 @@ router.post('/', async(req, res) => {
 
 router.get('/profile', async(req, res) => {
     try {
-        let user = await User.findOne({
-            where: {
-                user_id: req.session.user_id
-            }
-        })
-        res.json(user)
+        res.json(req.currentUser)
     } catch (error) {
-        res.json(null)
+        res.json(error)
     }
 })
 
